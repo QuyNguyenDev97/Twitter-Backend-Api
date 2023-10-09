@@ -1,11 +1,23 @@
 export enum UserVerifyStatus {
-  Unverified, // chưa xác thực email, mặc định = 0
-  Verified, // đã xác thực email
-  Banned // bị khóa
+  Unverified,
+  Verified,
+  Banned
 }
 
 export enum TokenType {
   AccessToken,
   RefeshToken,
   VerifyEmailToken
+}
+
+export enum ServerStatus {
+  OK = 200,
+  CREATED = 201,
+  ACCEPTED = 202,
+  BAD_REQUEST = 400,
+  UNAUTHORIZED = 401,
+  FORBIDDEN = 403,
+  NOT_FOUND = 404,
+  UNPROCESSABLE_ENTITY = 422,
+  INTERNAL_SERVER_ERROR = 500
 }

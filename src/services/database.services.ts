@@ -1,7 +1,7 @@
 import { config } from 'dotenv'
 import { Collection, Db, MongoClient } from 'mongodb'
+import RefeshToken from '~/models/schemas/RefeshToken.schema'
 import User from '~/models/schemas/User.schema'
-
 config()
 
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@twitter.8gabtj7.mongodb.net/?retryWrites=true&w=majority`
@@ -23,6 +23,9 @@ class DataBaseService {
   }
   get user(): Collection<User> {
     return this.db.collection(process.env.DB_USER_COLLECTION as string)
+  }
+  get refeshToken(): Collection<RefeshToken> {
+    return this.db.collection(process.env.DB_REFESH_TOKEN_COLLECTION as string)
   }
 }
 

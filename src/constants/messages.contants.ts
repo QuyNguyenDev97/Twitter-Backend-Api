@@ -35,5 +35,8 @@ export const USER_REPONSE_MESSAGES = {
   DATE_OF_BIRTH: {
     IS_REQUIRED: 'Date of birth is required',
     IS_NOT_VALID: 'Date of birth is not valid'
+  },
+  USER: {
+    IS_NOT_EXISTS: 'User is not exists'
   }
 } as const

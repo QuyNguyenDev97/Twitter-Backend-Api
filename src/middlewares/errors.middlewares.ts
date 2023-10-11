@@ -1,8 +1,18 @@
 import { NextFunction, Request, Response } from 'express'
 import { omit } from 'lodash'
 import { ServerStatus } from '~/constants/enum'
-import { ErrorWithStatusType } from '~/models/Errors'
+import { ErrorEntityStatus, ErrorWithStatus } from '~/models/Errors'
 
-export const defaultErrorHandler = (err: ErrorWithStatusType, req: Request, res: Response, next: NextFunction) => {
-  res.status(err.status || ServerStatus.INTERNAL_SERVER_ERROR).json(omit(err, 'status'))
+type ErrorHandleType = ErrorWithStatus | ErrorEntityStatus | Error
+
+export const defaultErrorHandler = (err: ErrorHandleType, req: Request, res: Response, next: NextFunction) => {
+  if (err instanceof ErrorWithStatus) {
+    return res.status(err.status).json(omit(err, 'status'))
+  }
+  Object.getOwnPropertyNames(err).forEach((key) => {
+    Object.defineProperty(err, key, {
+      enumerable: true
+    })
+  })
+  res.status(ServerStatus.INTERNAL_SERVER_ERROR).json({ message: err.message, error: omit(err, 'stack') })
 }

@@ -1,4 +1,6 @@
+import { config } from 'dotenv'
 import jwt, { Secret, SignOptions } from 'jsonwebtoken'
+config()
 
 type SignTokenParam = {
   payload: string | object | Buffer
